@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Computation</title>
+</head>
+
+<body>
+    <h1>Sandeep Nadendla computes</h1>
+    <div>
+
+        <input type="number" name="firstNum" id="x">
+        <!-- <input type="number" name="SecondNum" id="y"> -->
+    </div>
+
+    <button onclick="remoteCompute()">Remote compute</button>
+    <div id="result">
+
+    </div>
+    <script>
+
+        const remoteCompute = () => {
+            let x = document.getElementById("x").value;
+
+            let req = `http://127.0.0.1:3001?x=${x}`
+
+            fetch(req).then(
+                (response) => {
+                    return response.text();
+                }
+            ).then((data) => {
+                console.log(data)
+                document.getElementById("result").innerHTML = data
+            }).catch(err => {
+                document.getElementById("result").innerHTML = err
+            })
+        }
+    </script>
+</body>
+
+</html>
